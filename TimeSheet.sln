@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheetLibrary", "TimeSheetLibrary\TimeSheetLibrary.csproj", "{709C847E-AE2B-4E24-84DB-3C30F6CC6604}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormUI", "FormUI\FormUI.csproj", "{99603E3A-C2DD-4678-AAB7-24E347A34759}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{709C847E-AE2B-4E24-84DB-3C30F6CC6604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709C847E-AE2B-4E24-84DB-3C30F6CC6604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709C847E-AE2B-4E24-84DB-3C30F6CC6604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709C847E-AE2B-4E24-84DB-3C30F6CC6604}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99603E3A-C2DD-4678-AAB7-24E347A34759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99603E3A-C2DD-4678-AAB7-24E347A34759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99603E3A-C2DD-4678-AAB7-24E347A34759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99603E3A-C2DD-4678-AAB7-24E347A34759}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEFCF7BD-88FF-400F-AC4D-D1AF06E71BDC}
+	EndGlobalSection
+EndGlobal

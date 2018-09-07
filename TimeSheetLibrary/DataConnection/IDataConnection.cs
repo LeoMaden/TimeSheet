@@ -28,5 +28,17 @@ namespace TimeSheetLibrary.DataConnection
         List<TimeSheetEntry> GetHours_ThisWeek(Employment employment);
 
         double GetHours_NWeekAverage(int numberOfWeeks, DateTime endDate, Employment employment);
+
+        PaymentEntry AddNewPaymentEntry(PaymentEntry entry, Employment employment);
+
+        void DeletePayment(PaymentEntry payment);
+
+        void AddPayHoursLink(PaymentEntry payment, TimeSheetEntry hours);
+
+        List<TimeSheetEntry> GetLinkedHours(PaymentEntry payment);
+
+        void DeletePayHoursLink(PaymentEntry payment, TimeSheetEntry hours);
+
+        void UpdatePaymentExpectedValues(PaymentEntry payment);
     }
 }

@@ -20,6 +20,8 @@ namespace TimeSheetLibrary.Models
 
         public List<TimeSheetEntry> TimeSheetEntries { get; set; } = new List<TimeSheetEntry>();
 
+        public List<PaymentEntry> PaymentEntries { get; set; } = new List<PaymentEntry>();
+
         public DayOfWeek WeekBegin { get; set; } = DayOfWeek.Sunday;
 
 

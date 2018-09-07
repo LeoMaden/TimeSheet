@@ -110,6 +110,8 @@ namespace TimeSheetLibrary.DataConnection
 
                     List<TimeSheetEntry> timeSheetEntries = connection.Query<TimeSheetEntry>("dbo.spHours_GetByEmploymentID", p, commandType: CommandType.StoredProcedure).ToList();
 
+                    List<PaymentEntry> paymentEntries = connection.Query<PaymentEntry>("dbo.spPay_GetByEmploymentID", p, commandType: CommandType.StoredProcedure).ToList();
+
                     var emp = new Employment
                     {
                         ID = employmentID,
@@ -117,6 +119,7 @@ namespace TimeSheetLibrary.DataConnection
                         StartDate = employment.StartDate,
                         DefaultHourlyRate = employment.DefaultHourlyRate,
                         TimeSheetEntries = timeSheetEntries,
+                        PaymentEntries = paymentEntries,
                         WeekBegin = Enum.Parse(typeof(DayOfWeek), employment.WeekBegin)
                     };
 
@@ -231,6 +234,88 @@ namespace TimeSheetLibrary.DataConnection
             }
 
             return average;
+        }
+
+        public PaymentEntry AddNewPaymentEntry(PaymentEntry entry, Employment employment)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.GetCnnString("WorkTimeSheet")))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@Date", entry.Date);
+                parameters.Add("@EmpID", employment.ID);
+                parameters.Add("@ID", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                connection.Execute("dbo.spPay_AddNewPayment", parameters, commandType: CommandType.StoredProcedure);
+
+                entry.ID = parameters.Get<int>("@ID");
+            }
+
+            employment.PaymentEntries.Add(entry);
+
+            return entry;
+        }
+
+        public void DeletePayment(PaymentEntry payment)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.GetCnnString("WorkTimeSheet")))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@ID", payment.ID);
+
+                connection.Execute("dbo.spPay_DeletePayment", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void AddPayHoursLink(PaymentEntry payment, TimeSheetEntry hours)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.GetCnnString("WorkTimeSheet")))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@PayID", payment.ID);
+                parameters.Add("@HoursID", hours.ID);
+
+                connection.Execute("dbo.spPayHoursLink_AddLink", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public List<TimeSheetEntry> GetLinkedHours(PaymentEntry payment)
+        {
+            List<TimeSheetEntry> linkedHours;
+
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.GetCnnString("WorkTimeSheet")))
+            {
+                DynamicParameters p = new DynamicParameters();
+                p.Add("@PayID", payment.ID);
+
+                linkedHours = connection.Query<TimeSheetEntry>("dbo.spPayHoursLink_GetByPayID", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+
+            return linkedHours;
+        }
+
+        public void DeletePayHoursLink(PaymentEntry payment, TimeSheetEntry hours)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.GetCnnString("WorkTimeSheet")))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@PayID", payment.ID);
+                parameters.Add("@HoursID", hours.ID);
+
+                connection.Execute("dbo.spPayHoursLink_DeleteLink", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void UpdatePaymentExpectedValues(PaymentEntry payment)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.GetCnnString("WorkTimeSheet")))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ID", payment.ID);//, dbType: DbType.Int32);
+                p.Add("@HoursWorked", payment.HoursWorked);
+                p.Add("@ExpectedPay", payment.ExpectedPay);
+
+                connection.Execute("dbo.spPay_UpdateExpectedValues", p, commandType: CommandType.StoredProcedure);
+            }
         }
     }
 }

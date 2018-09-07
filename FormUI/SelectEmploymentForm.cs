@@ -102,9 +102,6 @@ namespace FormUI
 
         private void SelectEmploymentPayButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not implemented");
-            
-
             if (ValidateSelection() == false)
             {
                 MessageBox.Show("Invalid Selection");

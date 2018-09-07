@@ -232,7 +232,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(681, 470);
+            this.ClientSize = new System.Drawing.Size(684, 461);
             this.Controls.Add(this.HoursViewOptionComboBox);
             this.Controls.Add(this.DeleteSelectedHoursButton);
             this.Controls.Add(this.HoursListViewBox);

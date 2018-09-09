@@ -47,6 +47,27 @@ namespace FormUI
             }
         }
 
+        private void UpdatePayColourCoding()
+        {
+            foreach (ListViewItem item in PayListViewBox.Items)
+            {
+                PaymentEntry payItem = (PaymentEntry)item.Tag;
+
+                if (payItem.ActualPay == 0)
+                {
+                    continue;
+                }
+                else if (payItem.ActualPay < payItem.ExpectedPay)
+                {
+                    item.BackColor = Color.OrangeRed;
+                }
+                else if (payItem.ActualPay >= payItem.ExpectedPay)
+                {
+                    item.BackColor = Color.LightGreen;
+                } 
+            }
+        }
+
         private void PopulatePayListView()
         {
             PayListViewBox.Items.Clear();
@@ -71,6 +92,7 @@ namespace FormUI
             }
 
             PayListViewBox.Sort();
+            UpdatePayColourCoding();
         }
 
         private void PopulateHoursListView()

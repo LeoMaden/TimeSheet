@@ -48,6 +48,9 @@
             this.LinkHoursPayButton = new System.Windows.Forms.Button();
             this.UnlinkHoursPayButton = new System.Windows.Forms.Button();
             this.DeletePaymentButton = new System.Windows.Forms.Button();
+            this.ActualPayLabel = new System.Windows.Forms.Label();
+            this.ActualPayTextBox = new System.Windows.Forms.TextBox();
+            this.SetActualPayButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -90,7 +93,7 @@
             // EmploymentLabel
             // 
             this.EmploymentLabel.AutoSize = true;
-            this.EmploymentLabel.Location = new System.Drawing.Point(346, 24);
+            this.EmploymentLabel.Location = new System.Drawing.Point(789, 21);
             this.EmploymentLabel.Name = "EmploymentLabel";
             this.EmploymentLabel.Size = new System.Drawing.Size(134, 30);
             this.EmploymentLabel.TabIndex = 9;
@@ -99,7 +102,7 @@
             // EmploymentNameLabel
             // 
             this.EmploymentNameLabel.AutoSize = true;
-            this.EmploymentNameLabel.Location = new System.Drawing.Point(486, 24);
+            this.EmploymentNameLabel.Location = new System.Drawing.Point(929, 21);
             this.EmploymentNameLabel.Name = "EmploymentNameLabel";
             this.EmploymentNameLabel.Size = new System.Drawing.Size(157, 30);
             this.EmploymentNameLabel.TabIndex = 10;
@@ -120,7 +123,7 @@
             this.PayListViewBox.Location = new System.Drawing.Point(300, 77);
             this.PayListViewBox.MultiSelect = false;
             this.PayListViewBox.Name = "PayListViewBox";
-            this.PayListViewBox.Size = new System.Drawing.Size(324, 242);
+            this.PayListViewBox.Size = new System.Drawing.Size(331, 242);
             this.PayListViewBox.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.PayListViewBox.TabIndex = 14;
             this.PayListViewBox.UseCompatibleStateImageBehavior = false;
@@ -141,12 +144,12 @@
             // ExpectedPayCol
             // 
             this.ExpectedPayCol.Text = "Expected";
-            this.ExpectedPayCol.Width = 67;
+            this.ExpectedPayCol.Width = 65;
             // 
             // ActualPayCol
             // 
             this.ActualPayCol.Text = "Actual";
-            this.ActualPayCol.Width = 50;
+            this.ActualPayCol.Width = 65;
             // 
             // AddPaymentButton
             // 
@@ -169,7 +172,7 @@
             this.HoursListViewBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HoursListViewBox.FullRowSelect = true;
             this.HoursListViewBox.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.HoursListViewBox.Location = new System.Drawing.Point(723, 77);
+            this.HoursListViewBox.Location = new System.Drawing.Point(730, 77);
             this.HoursListViewBox.Name = "HoursListViewBox";
             this.HoursListViewBox.Size = new System.Drawing.Size(356, 242);
             this.HoursListViewBox.Sorting = System.Windows.Forms.SortOrder.Descending;
@@ -201,7 +204,7 @@
             // LinkHoursPayButton
             // 
             this.LinkHoursPayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LinkHoursPayButton.Location = new System.Drawing.Point(630, 149);
+            this.LinkHoursPayButton.Location = new System.Drawing.Point(637, 149);
             this.LinkHoursPayButton.Name = "LinkHoursPayButton";
             this.LinkHoursPayButton.Size = new System.Drawing.Size(87, 40);
             this.LinkHoursPayButton.TabIndex = 17;
@@ -212,7 +215,7 @@
             // UnlinkHoursPayButton
             // 
             this.UnlinkHoursPayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.UnlinkHoursPayButton.Location = new System.Drawing.Point(630, 195);
+            this.UnlinkHoursPayButton.Location = new System.Drawing.Point(637, 195);
             this.UnlinkHoursPayButton.Name = "UnlinkHoursPayButton";
             this.UnlinkHoursPayButton.Size = new System.Drawing.Size(87, 40);
             this.UnlinkHoursPayButton.TabIndex = 18;
@@ -231,12 +234,42 @@
             this.DeletePaymentButton.UseVisualStyleBackColor = true;
             this.DeletePaymentButton.Click += new System.EventHandler(this.DeletePaymentButton_Click);
             // 
+            // ActualPayLabel
+            // 
+            this.ActualPayLabel.AutoSize = true;
+            this.ActualPayLabel.Location = new System.Drawing.Point(295, 24);
+            this.ActualPayLabel.Name = "ActualPayLabel";
+            this.ActualPayLabel.Size = new System.Drawing.Size(89, 30);
+            this.ActualPayLabel.TabIndex = 21;
+            this.ActualPayLabel.Text = "Actual £";
+            // 
+            // ActualPayTextBox
+            // 
+            this.ActualPayTextBox.Location = new System.Drawing.Point(379, 24);
+            this.ActualPayTextBox.Name = "ActualPayTextBox";
+            this.ActualPayTextBox.Size = new System.Drawing.Size(100, 35);
+            this.ActualPayTextBox.TabIndex = 22;
+            // 
+            // SetActualPayButton
+            // 
+            this.SetActualPayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SetActualPayButton.Location = new System.Drawing.Point(485, 24);
+            this.SetActualPayButton.Name = "SetActualPayButton";
+            this.SetActualPayButton.Size = new System.Drawing.Size(62, 35);
+            this.SetActualPayButton.TabIndex = 23;
+            this.SetActualPayButton.Text = "Set";
+            this.SetActualPayButton.UseVisualStyleBackColor = true;
+            this.SetActualPayButton.Click += new System.EventHandler(this.SetActualPayButton_Click);
+            // 
             // LogPayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1095, 461);
+            this.Controls.Add(this.SetActualPayButton);
+            this.Controls.Add(this.ActualPayTextBox);
+            this.Controls.Add(this.ActualPayLabel);
             this.Controls.Add(this.DeletePaymentButton);
             this.Controls.Add(this.UnlinkHoursPayButton);
             this.Controls.Add(this.LinkHoursPayButton);
@@ -281,5 +314,8 @@
         private System.Windows.Forms.Button LinkHoursPayButton;
         private System.Windows.Forms.Button UnlinkHoursPayButton;
         private System.Windows.Forms.Button DeletePaymentButton;
+        private System.Windows.Forms.Label ActualPayLabel;
+        private System.Windows.Forms.TextBox ActualPayTextBox;
+        private System.Windows.Forms.Button SetActualPayButton;
     }
 }

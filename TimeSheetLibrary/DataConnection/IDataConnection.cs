@@ -40,5 +40,7 @@ namespace TimeSheetLibrary.DataConnection
         void DeletePayHoursLink(PaymentEntry payment, TimeSheetEntry hours);
 
         void UpdatePaymentExpectedValues(PaymentEntry payment);
+
+        void UpdatePaymentActualPay(PaymentEntry payment);
     }
 }

@@ -170,6 +170,14 @@ namespace FormUI
 
             PaymentEntry selected = (PaymentEntry)PayListViewBox.SelectedItems[0].Tag;
 
+            List<TimeSheetEntry> links = GlobalConfig.Connection.GetLinkedHours(selected);
+
+            if (links.Count != 0)
+            {
+                MessageBox.Show("Please unlink hours before deleting");
+                return;
+            }
+
             GlobalConfig.Connection.DeletePayment(selected);
 
             Employment.PaymentEntries.Remove(selected);
@@ -226,6 +234,13 @@ namespace FormUI
         private void PayListViewBox_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             HighlightLinkedHours();
+
+            if (IsPaymentSelected() == true)
+            {
+                PaymentEntry selected = (PaymentEntry)PayListViewBox.SelectedItems[0].Tag;
+
+                ActualPayTextBox.Text = selected.ActualPay.ToString();
+            }
         }
 
         private void UnlinkHoursPayButton_Click(object sender, EventArgs e)
@@ -258,6 +273,30 @@ namespace FormUI
         private bool IsPaymentSelected()
         {
             return PayListViewBox.SelectedIndices.Count != 0;
+        }
+
+        private void SetActualPayButton_Click(object sender, EventArgs e)
+        {
+            if (IsPaymentSelected() == false)
+            {
+                return;
+            }
+
+            bool validActualPay = decimal.TryParse(ActualPayTextBox.Text, out decimal actualPay);
+
+            if (validActualPay == false)
+            {
+                MessageBox.Show("Invalid pay entered");
+                return;
+            }
+
+            PaymentEntry selected = (PaymentEntry)PayListViewBox.SelectedItems[0].Tag;
+
+            selected.ActualPay = actualPay;
+
+            GlobalConfig.Connection.UpdatePaymentActualPay(selected);
+
+            PopulatePayListView();
         }
     }
 }

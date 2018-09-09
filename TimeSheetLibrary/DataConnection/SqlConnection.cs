@@ -317,5 +317,17 @@ namespace TimeSheetLibrary.DataConnection
                 connection.Execute("dbo.spPay_UpdateExpectedValues", p, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void UpdatePaymentActualPay(PaymentEntry payment)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.GetCnnString("WorkTimeSheet")))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ID", payment.ID);
+                p.Add("@ActualPay", payment.ActualPay);
+
+                connection.Execute("dbo.spPay_UpdateActualPay", p, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
